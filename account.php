@@ -52,13 +52,25 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-         echo "<article><h3>Nombre: " . $row["fileName"]. " - </h3><p>Description: " . $row["fileDescription"]. "</p><a href=". $row["fileUrl"] .">VER</a><p><i>Fecha: " . $row["fileDate"] . "</p></i></article><br>";
+         echo "<article><h3>Nombre: " . $row["fileName"]. " - </h3><p>Description: " . $row["fileDescription"]. "</p><a href=". $row["fileUrl"] .">VER</a><a class='btn btn-danger' href='?deleteID=" . $row["fileID"] . "'> DELETE</a><p><i>Fecha: " . $row["fileDate"] . "</p></i></article><br>";
     }
 } else {
     echo "";
 }
-$conn->close();
-      ?>
+
+if (isset($_GET["deleteID"])) {
+    $deleteID  = $_GET["deleteID"];
+    $sql = "DELETE FROM `files` WHERE ((`fileID` = '$deleteID'));";
+    
+    if ($conn->query($sql) === TRUE) {
+        echo '<script>alert("OK");</script>';
+    } else {
+        die("Error: " . $sql . "<br>" . $conn->error);
+    }
+    
+    $conn->close();
+}
+?>
     </main><!-- /.container -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
