@@ -39,27 +39,48 @@ $f_username = $_SESSION["username"];
    }
 ?>
 <html>
-  <head><title>Subir archivo</title><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></head>
+  <head><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Subir archivo</title><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></head>
    <body>
-     <header class="jumbotron">
-       <h1> Subiendo archivo como : <?php echo "$f_username"; ?> </h1></header>
-      <form action = "" method = "POST" enctype = "multipart/form-data" class="form-control">
-         <input type = "file" name = "image" required /><br>
-         <input type = "text" name="title" required placeholder="Titulo"/>
-         <input type = "text" name="description" required placeholder="Descripcion"/> <br>
-        <input type="checkbox" name="fileType" value="2"> MARCAR SI QUIERE QUE EL ARCHIVO SEA PRIVADO<br>
-  <!-- <input type="radio" name="fileType" value="2"> ARCHIVO PRIVADO NO USAR ESTA EN BETA NO USAR<br> -->
-          <input type = "submit" class="btn btn-success"/>
-         <ul>
-            <li>Nombre archivo: <?php echo $_FILES['image']['name'];  ?>
-            <li>Peso archivo: <?php echo $_FILES['image']['size'];  ?>
-            <li>Tipo de archivo: <?php echo $_FILES['image']['type']; ?>
-         </ul>
-            
+     <header class=" bg-dark jumbotron">
+        <style>
+        h1{
+
+        }
+        </style>
+       <h1 class="text-light text-center font-weight-bold"> Subiendo archivo como: <?php echo "$f_username"; ?> </h1></header>
+      <div class="d-flex justify-content-center text-center">
+       <form action = "" method = "POST" enctype = "multipart/form-data" class="">
+<div id="formm" class="alert-success alert">
+     <div>   Titulo del Archivo: <input type = "text" name="title" required placeholder="Titulo"/></div>
+     <div> <br> Descripcion del archivo: <input type = "text" name="description" required placeholder="Descripcion"/> <br>     </div> 
+         <div> <br> <input type="checkbox" name="fileType" value="2"> Marcar si el archivo es privado.<br>     </div> 
+<div> <br>       <input type = "file" name = "image" /><br></div>
+ 
+ 
+ <div> <br><input type = "submit" class="btn btn-success"/> <br> </div>
+ <div> <br>
+   <li class="font-weight-bold">Nombre archivo:<br> <?php echo $_FILES['image']['name'];  ?><br>
+   <li class="font-weight-bold">Peso archivo:<br> <?php echo $_FILES['image']['size'];  ?><br>
+   <li class="font-weight-bold">Tipo de archivo:<br> <?php echo $_FILES['image']['type']; ?><br>
+      </div>
+  </div>
+      </div>
+
+
       </form>
+
       
    </body>
+<footer>
+   <style>  
+
+   </style>
+
+
+
+</footer>
 </html>
+
 <?php 
 $fileLocation = $_FILES['image']['name'];
 $fileName = $_POST["title"];
