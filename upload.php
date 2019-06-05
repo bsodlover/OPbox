@@ -23,18 +23,18 @@ $f_username = $_SESSION["username"];
       $expensions= array("jpeg","jpg","zip","rar","png","exe","docx","odt","rtf","wav","mp4");
       
       if(in_array($file_ext,$expensions)=== false){
-         $errors[]="Solo puedes subir archvios .zip, .rar, o .jpeg";
+        // $errors[]="Solo puedes subir archvios .zip, .rar, o .jpeg";
       }
       
       if($file_size > 20971520000000) {
-         $errors[]='Archivo demasiado grande';
+       //  $errors[]='Archivo demasiado grande';
       }
       
       if(empty($errors)==true) {
          move_uploaded_file($file_tmp,"/var/www/opfiles/".$file_name);
-         echo "Success";
+         $success++;
       }else{
-         print_r($errors);
+         die(print_r($errors));
       }
    }
 ?>
@@ -44,12 +44,12 @@ $f_username = $_SESSION["username"];
      <header class="jumbotron">
        <h1> Subiendo archivo como : <?php echo "$f_username"; ?> </h1></header>
       <form action = "" method = "POST" enctype = "multipart/form-data" class="form-control">
-         <input type = "file" name = "image" /><br>
+         <input type = "file" name = "image" required /><br>
          <input type = "text" name="title" required placeholder="Titulo"/>
          <input type = "text" name="description" required placeholder="Descripcion"/> <br>
         <input type="checkbox" name="fileType" value="2"> MARCAR SI QUIERE QUE EL ARCHIVO SEA PRIVADO<br>
-  <!-- <input type="radio" name="fileType" value="2"> ARCHIVO PRIVADO NO USAR ESTA EN BETA NO USAR<br> -->   
-        <input type = "submit" class="btn btn-success"/>
+  <!-- <input type="radio" name="fileType" value="2"> ARCHIVO PRIVADO NO USAR ESTA EN BETA NO USAR<br> -->
+          <input type = "submit" class="btn btn-success"/>
          <ul>
             <li>Nombre archivo: <?php echo $_FILES['image']['name'];  ?>
             <li>Peso archivo: <?php echo $_FILES['image']['size'];  ?>
@@ -84,11 +84,12 @@ $sql = "INSERT INTO `files` (`fileUrl`, `fileLink`, `fileDescription`, `fileType
 VALUES ('$url', '$fileLocation', '$fileDescription', '$fileType', '$f_username', '$fileName', now())";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br> Insertado correctamente";
+    $success++;
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    die($conn->error);
 }
 
 $conn->close();
+if($success == 2){echo '<script>alert("OK");</script>';} else {echo '<script>alert("Error");</script>';}
 
  ?>
