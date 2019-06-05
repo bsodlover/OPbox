@@ -48,8 +48,7 @@ $f_username = $_SESSION["username"];
          <input type = "text" name="title" required placeholder="Titulo"/>
          <input type = "text" name="description" required placeholder="Descripcion"/> <br>
         <input type="checkbox" name="fileType" value="2"> MARCAR SI QUIERE QUE EL ARCHIVO SEA PRIVADO<br>
-  <!-- <input type="radio" name="fileType" value="2"> ARCHIVO PRIVADO NO USAR ESTA EN BETA NO USAR<br> -->
-        <input type="checkbox" name="ok" value="true" required>Confirmacion de subir archivo<br>    
+  <!-- <input type="radio" name="fileType" value="2"> ARCHIVO PRIVADO NO USAR ESTA EN BETA NO USAR<br> -->   
         <input type = "submit" class="btn btn-success"/>
          <ul>
             <li>Nombre archivo: <?php echo $_FILES['image']['name'];  ?>
@@ -70,7 +69,7 @@ $fileType = "1";
 if ($_POST["fileType"]=="2") {$fileType = "2";}
 $check = $_POST["ok"];
 require_once 'config.php';
-if ($check=="true") {
+if (isset($_POST["title"])) {
 } else {die();}
 $url = "file.php?t=$fileType&a=$f_username&n=$fileNamespace";
 echo "Link: $url";
