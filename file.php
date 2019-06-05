@@ -4,9 +4,7 @@ $fileType = $_GET["t"];
 $fileAuthor = $_GET["a"];
 $fileName = $_GET["n"];
 //CHECK get  VARIABLES
-if(empty($fileType)){ die("<h1>Incorrect URL</h1>");}
-if(empty($fileAuthor)){ die("<h1>Incorrect URL</h1>");}
-if(empty($fileName)){ die("<h1>Incorrect URL</h1>");}
+if(empty($fileType)||empty($fileAuthor)||empty($fileName)){ die("<h1>Incorrect URL</h1>");}
 //sql
 require_once 'config.php';
 // Create connection
@@ -41,7 +39,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 $f_username = $_SESSION["username"];  
-if ($fileAuthor==$f_username) {} else {die("<h1>Permission denied.</h1>");}
+if ($fileAuthor!=$f_username) {die("<h1>Permission denied.</h1>");}
 }
 $nombre = $fileLink;  
 $filename = "/var/www/opfiles/$fileLink";  
