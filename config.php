@@ -4,8 +4,8 @@ define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'laweb');
 define('DB_PASSWORD', 'mateomolaxdd');
 define('DB_NAME', 'opbox');
-//Put on here your directory for files. Not recommended to be the same as your web files
-$saveLocation = "/var/www/opfiles";
+//Put on here your directory for files and finish with slash. Not recommended to be the same as your web files
+$saveLocation = "/var/www/opfiles/";
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
