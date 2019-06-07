@@ -31,7 +31,7 @@ $f_username = $_SESSION["username"];
       }
       
       if(empty($errors)==true) {
-         move_uploaded_file($file_tmp,"/var/www/opfiles/".$file_name);
+         move_uploaded_file($file_tmp,$saveLocation.$file_name);
          $success++;
       }else{
          die(print_r($errors));
