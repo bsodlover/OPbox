@@ -60,6 +60,18 @@ if ($result->num_rows > 0) {
 
 if (isset($_GET["deleteID"])) {
     $deleteID  = $_GET["deleteID"];
+    $sql = "SELECT * FROM `files` WHERE `fileID` = '$deleteID'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $fileLink = $row["fileLink"];
+       unlink($saveLocation.$fileLink);
+    }
+} else {
+    die("El archivo no se pudo borrar");
+}
     $sql = "DELETE FROM `files` WHERE ((`fileID` = '$deleteID'));";
     
     if ($conn->query($sql) === TRUE) {
