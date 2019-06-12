@@ -30,14 +30,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 mysqli_close($conn);
 if ($_GET["t"]=="2") {
-// Initialize the session
-session_start();
- 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php?e=403");
-    exit;
-}
+require_once 'checkLogin.php';
 $f_username = $_SESSION["username"];  
 if ($fileAuthor!=$f_username) {die("<h1>Permission denied.</h1>");}
 }
