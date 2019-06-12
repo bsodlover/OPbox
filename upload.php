@@ -2,14 +2,7 @@
 @ini_set( 'upload_max_size' , '64M' );
 @ini_set( 'post_max_size', '64M');
 @ini_set( 'max_execution_time', '300' );
-// Initialize the session
-session_start();
- 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php?e=403");
-    exit;
-}
+require_once 'checkLogin.php';
 $f_username = $_SESSION["username"];
 
    if(isset($_FILES['image'])){
